@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BNS Legal Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #FF9933, #FFFFFF, #138808);
+      color: #000;
+    }
+
+    header {
+      background-color: #FF9933;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      border-bottom: 5px solid #138808;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0px 0px 15px #888888;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 12px;
+      font-size: 18px;
+      border: 2px solid #138808;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #138808;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0f660f;
+    }
+
+    .important-sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .important-sections button {
+      background-color: #000080;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .important-sections button:hover {
+      background-color: #001144;
+    }
+
+    .result-card {
+      border: 2px solid #000080;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      background-color: #f5faff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .result-card h3 {
+      margin-top: 0;
+      color: #000080;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #138808;
+      color: white;
+      font-weight: bold;
+      margin-top: 50px;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Bharatiya Nyaya Sanhita (BNS) Legal Dashboard 🇮🇳
+  </header>
+
+  <div class="container">
+    <h2>🔍 Search BNS Section:</h2>
+    <input type="text" id="queryInput" placeholder="e.g., murder, 302, cheating" />
+    <button onclick="search()">Search</button>
+
+    <h3 style="margin-top: 30px;">📌 Important Sections:</h3>
+    <div class="important-sections">
+      <button onclick="quickSearch('302')">302</button>
+      <button onclick="quickSearch('375')">375</button>
+      <button onclick="quickSearch('420')">420</button>
+      <button onclick="quickSearch('376')">376</button>
+      <button onclick="quickSearch('307')">307</button>
+      <button onclick="quickSearch('326')">326</button>
+    </div>
+
+    <div id="results"></div>
+  </div>
+
+  <div class="footer">
+    Made with ❤️ in India | 🇮🇳 Inspired by Indian Constitution
+  </div>
+
+  <script>
+    function search() {
+      const query = document.getElementById('queryInput').value.trim();
+      if (!query) {
+        document.getElementById('results').innerHTML =
+          "<p style='color:red;'>Please enter a search term.</p>";
+        return;
+      }
+
+      fetch(`/search?query=${query}`)
+        .then((response) => response.json())
+        .then((data) => displayResults(data))
+        .catch(() => {
+          document.getElementById('results').innerHTML =
+            "<p style='color:red;'>Error fetching data.</p>";
+        });
+    }
+
+    function quickSearch(term) {
+      document.getElementById('queryInput').value = term;
+      search();
+    }
+
+    function displayResults(data) {
+      if (data.length === 0) {
+        document.getElementById('results').innerHTML =
+          "<p style='color:red;'>No matching sections found.</p>";
+        return;
+      }
+
+      let html = "";
+      data.forEach((item) => {
+        html += `
+          <div class="result-card">
+            <h3>Section ${item.section_number}: ${item.title}</h3>
+            <p><span class="label">Act:</span> ${item.act}</p>
+            <p><span class="label">Description:</span> ${item.description}</p>
+            <p><span class="label">Punishment:</span> ${item.punishment}</p>
+            <p><span class="label">Court:</span> ${item.court}</p>
+            <p><span class="label">FIR Required:</span> ${item.fir_required}</p>
+            <p><span class="label">Where to file FIR:</span> ${item.where_to_file_fir}</p>
+          </div>
+        `;
+      });
+
+      document.getElementById('results').innerHTML = html;
+    }
+  </script>
+</body>
+</html>
