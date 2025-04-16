@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f6d365, #fda085); /* Modern gradient */
+    color: #333;
+    text-align: center;
+}
+
+h1, h2 {
+    font-size: 3rem; /* Large headings */
+    margin-bottom: 20px;
+    color: #bc7b7b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Welcome Page */
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.welcome-container a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 20px;
+    font-size: 2rem; /* Large buttons */
+    font-weight: bold;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: rgb(136, 37, 37);
+}
+
+.donor-btn {
+    background: #4CAF50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.recipient-btn {
+    background: #f39c12;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.login-btn {
+    background: #3498db;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-container a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Form Styles */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+form input, form select, form textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #380a0a;
+}
+
+form button {
+    background: #2ecc71;
+    color: #e46f6f;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background: #27ae60;
+}
+
+/* Table Styles */
+table {
+    margin: 20px auto;
+    width: 90%;
+    border-collapse: collapse;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #430d0d;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+table th {
+    background: #4caf50;
+    color: rgb(113, 70, 70);
+}
+
+table tr:nth-child(even) {
+    background: #d1a3a3;
+}
+
+table tr:hover {
+    background: #d35c5c;
+}
+
+/* Footer */
+footer {
+    background: #2c3e50;
+    color: rgb(188, 136, 136);
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
